@@ -1,37 +1,42 @@
 from collections import Counter
 import matplotlib.pyplot as plt
 
-# This function tells the widget how the plot should look at a specific parametrization 
 def interactive_figure(data1, data2, country):
+    """
+    Plot the time series of GDP growth and debt for a selected country.
+
+    Parameters:
+    - data1: DataFrame containing GDP growth data with columns 'year', 'Countries', and 'annual_gdp_growth'.
+    - data2: DataFrame containing debt data with columns 'year', 'Countries', and 'debt'.
+    - country: Name of the country for which to plot the time series.
+
+    Returns:
+    - None
+    """
     # Create a figure
-    fig = plt.figure(frameon=True,figsize=(30,12), dpi=100)
-    ax = fig.add_subplot(1,2,1)
-    
-    # Plot the selected country's GDP growth time series
-    selected_country_data = data1[data1['Countries'] == country]
-    ax.plot(selected_country_data['year'], selected_country_data['annual_gdp_growth'])
-    
-    # Set the title
-    ax.set_xlabel('year')
-    plt.xticks(rotation=45)
-    ax.set_ylabel('annual gdp growth (in %)')
+    fig = plt.figure(frameon=True, figsize=(30, 12), dpi=100)
+
+    # Plot GDP growth
+    ax = fig.add_subplot(1, 2, 1)
+    selected_country_data1 = data1[data1['Countries'] == country]
+    ax.plot(selected_country_data1['year'], selected_country_data1['annual_gdp_growth'])
+    ax.set_xlabel('Year')
+    ax.set_ylabel('Annual GDP Growth (%)')
     ax.set_title("Time Series of GDP Growth for {}".format(country))
-
-
-    az = fig.add_subplot(1,2,2)
-    
-    # Plot the selected country's debt time series
-    selected_country_data = data2[data2['Countries'] == country]
-    az.plot(selected_country_data['year'], selected_country_data['debt'])
-    
-    # Set the title
-    az.set_xlabel('year')
     plt.xticks(rotation=45)
-    az.set_ylabel('annual gdp growth (in %)')
-    az.set_title("Time Series of debt for {}".format(country))
-    
+
+    # Plot debt
+    az = fig.add_subplot(1, 2, 2)
+    selected_country_data2 = data2[data2['Countries'] == country]
+    az.plot(selected_country_data2['year'], selected_country_data2['debt'])
+    az.set_xlabel('Year')
+    az.set_ylabel('Debt')
+    az.set_title("Time Series of Debt for {}".format(country))
+    plt.xticks(rotation=45)
+
     # Show the plot
     plt.show()
+
 
 
 
