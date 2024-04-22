@@ -1,6 +1,6 @@
 # Data analysis project
 
-Our project is titled **Annual GDP Growth and Debt of the 27 EU-countries**.
+Our project is titled **Annual GDP Growth and Debt of the 27 EU-countries**. We focus on the relationship between GDP growth and debt in the current 27 EU member states for the period 2000 to 2022. 
 
 The **results** of the project can be seen from running [DC_dataproject.ipynb](DC_dataproject.ipynb).
 
