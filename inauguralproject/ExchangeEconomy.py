@@ -20,7 +20,17 @@ class ExchangeEconomyClass:
 
     def utility_B(self,x1B,x2B):
         return x1B**(self.par.beta)*x2B**(1-self.par.beta)
+    
+    ## for the first plot in question 1
+    def is_pareto(self, x1A, x2A):
+        x1B, x2B = 1 - x1A, 1 - x2A
+        utility_personA = self.utility_A(self.par.w1A, self.par.w2A)
+        utility_personB = self.utility_B(1-self.par.w1A, 1-self.par.w2A)
+        return (self.utility_A(x1A, x2A) >= utility_personA and
+        self.utility_B(x1B, x2B) >= utility_personB)
+    
 
+    
     def demand_A(self,p1):
         demand_x1 =  self.par.alpha * (p1*self.par.w1A + self.par.w2A)/p1  
         demand_x2 = (1-self.par.alpha) * (p1*self.par.w1A + self.par.w2A)
@@ -67,4 +77,3 @@ class ExchangeEconomyClass:
         xA2 = x[1]
         return -(self.utility_A(xA1, xA2) + self.utility_B(1 - xA1, 1 - xA2))
 
-    
