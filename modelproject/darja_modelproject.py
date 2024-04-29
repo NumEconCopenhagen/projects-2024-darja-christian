@@ -47,10 +47,17 @@ class stackelbergduopolClass:
         profit_2 = self.P(x_1, x_2) * x_2 - self.C_2(x_2)
         return profit_2
 
+
     ## first order conditions
-    def derivative_1(self, x_1, x_2, a = 5, b = 1/4, p = 2):
-        foc_1 = self.P(x_1, x_2) + x_1 * (- b) - p
+    def derivative_1(self, x_1, a = 5, b = 1/4, p = 2):
+        x_2_best = (a-p)/(2*b) - x_1/2
+        foc_1 = self.P(x_1, x_2_best) + x_1 * (- b) - p
         return foc_1
+    
+    def second_derivative_1(self, x_1, a = 5, b = 1/4, p = 2):
+         x_2_best = (a-p)/(2*b) - x_1/2
+         soc_1 = -b - b - b/2 
+         return soc_1
 
     def derivative_2(self, x_1, x_2, a = 5, b = 1/4, p = 1):
         foc_2 = self.P(x_1, x_2) + x_2 * (-b) - p
@@ -62,4 +69,47 @@ class stackelbergduopolClass:
         x_2 = (a-p)/(2*b) - x_1/2
         return x_2
 
-     
+
+    def minimize_solver(self, x0, alphas=[0.01,0.05,0.1,0.25,0.5,1], max_iter=500,tol=1e-8):
+        # step 1: initialize
+        x = x0
+        fx = self.neg_objective_1(x0)
+        nit = 1
+        nfev = 1
+        njev = 0
+        
+            # step 2-6: iteration
+        while nit < max_iter:
+            
+            x_prev = x
+            fx_prev = fx
+        
+        
+        # step 3: find good step size (line search)
+            fx_ast = np.inf
+            x_ast = np.nan
+            alpha_ast = np.nan
+            for alpha in alphas:
+                x = x_prev - self.derivative_1(x_prev)/self.second_derivative_1(x_prev)
+                fx = self.neg_objective_1(x)
+                nfev += 1
+                if fx < fx_ast and x >0 :
+                    alpha_ast = alpha
+                    x_ast = x                
+                    fx_ast = fx
+        
+        # step 4: update guess
+            x = x_ast # = x_prev - alpha_ast*jacx
+
+                            
+        # step 5: check convergence
+            fx = fx_ast # = f(x)
+            if abs(fx-fx_prev) < tol:
+                break
+            
+        # step 6. update counter
+            nit += 1
+        
+        return x,nit,nfev,njev
+    
+    
