@@ -31,10 +31,16 @@ class stackelbergduopolClass:
 
 
 ## solving analytically 
-## profit function
-    def objective_1(self, x_1, x_2):
-        profit_1 = self.P(x_1, x_2) * x_1 - self.C_1(x_1)
+## profit function for firm 1 written only by x_1
+    def objective_1(self, x_1, a = 5, b = 1/4, p =1):
+        x_2_best = (a-p)/(2*b) - x_1/2
+        profit_1 = self.P(x_1, x_2_best) * x_1 - self.C_1(x_1)
         return profit_1
+    
+    ## negative objective function 
+    def neg_objective_1(self, x_1, a = 5, b = 1/4, p =1): 
+       negative = -self.objective_1(x_1, a, b, p)
+       return negative
 
 
     def objective_2(self, x_1, x_2):
@@ -51,5 +57,9 @@ class stackelbergduopolClass:
         return foc_2
 
 
+    ## best function of person 2: 
+    def best_func2(self, x_1, a = 5, b = 1/4, p =1): 
+        x_2 = (a-p)/(2*b) - x_1/2
+        return x_2
 
      
