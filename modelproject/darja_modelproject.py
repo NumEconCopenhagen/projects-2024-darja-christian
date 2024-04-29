@@ -90,6 +90,7 @@ class stackelbergduopolClass:
             x_ast = np.nan
             alpha_ast = np.nan
             for alpha in alphas:
+                ## using taylor approximation here 
                 x = x_prev - self.derivative_1(x_prev)/self.second_derivative_1(x_prev)
                 fx = self.neg_objective_1(x)
                 nfev += 1
