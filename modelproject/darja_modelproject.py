@@ -91,6 +91,7 @@ class stackelbergduopolClass:
             alpha_ast = np.nan
             for alpha in alphas:
                 ## using taylor approximation here 
+                # it should be possible to use sympy here to avoid own calculation of derivatives 
                 x = x_prev - self.derivative_1(x_prev)/self.second_derivative_1(x_prev)
                 fx = self.neg_objective_1(x)
                 nfev += 1
