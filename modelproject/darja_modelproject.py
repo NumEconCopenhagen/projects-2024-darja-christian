@@ -41,6 +41,15 @@ class stackelbergduopolClass:
         profit_2 = self.P(x_1, x_2) * x_2 - self.C_2(x_2)
         return profit_2
 
+    ## first order conditions
+    def derivative_1(self, x_1, x_2, a = 5, b = 1/4, p = 2):
+        foc_1 = self.P(x_1, x_2) + x_1 * (- b) - p
+        return foc_1
 
-        
-        
+    def derivative_2(self, x_1, x_2, a = 5, b = 1/4, p = 1):
+        foc_2 = self.P(x_1, x_2) + x_2 * (-b) - p
+        return foc_2
+
+
+
+     
