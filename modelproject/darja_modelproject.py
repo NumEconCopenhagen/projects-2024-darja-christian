@@ -145,9 +145,9 @@ class stackelbergduopolClass:
         ax.scatter(optimal_x1, optimal_x2, color = "darkgreen")
         ax.set_xlim([0,30]) # fixed x1 range
         ax.set_ylim([0,30]) # fixed x2 range
-        ax.set_xlabel("$x_1$")
-        ax.set_ylabel("$x_2$")
-        ax.set_title("Visualization of changing different parameters")
+        ax.set_xlabel("$x_L$")
+        ax.set_ylabel("$x_F$")
+        ax.set_title("Visualization of solution depending on different parameters")
 
         # Show the plot
         plt.show()
