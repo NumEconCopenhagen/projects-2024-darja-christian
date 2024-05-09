@@ -117,6 +117,7 @@ class stackelbergduopolClass:
         return x,nit,nfev,njev
     
 
+    ## for the interactive plot
     def interactive_figure(self, p1, p2, a_1, b_1):
         ## solution using sympy 
         x_1 = sm.symbols("x_1")
@@ -141,8 +142,8 @@ class stackelbergduopolClass:
         fig = plt.figure(frameon=True, dpi=500)
         ax = fig.add_subplot(1, 1, 1)
         ax.scatter(optimal_x1, optimal_x2, color = "darkgreen")
-        ax.set_xlim([0,30]) # fixed x range
-        ax.set_ylim([0,30]) # fixed y range
+        ax.set_xlim([0,30]) # fixed x1 range
+        ax.set_ylim([0,30]) # fixed x2 range
         ax.set_xlabel("$x_1$")
         ax.set_ylabel("$x_2$")
         ax.set_title("Changing parameters")
