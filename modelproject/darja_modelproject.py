@@ -147,7 +147,7 @@ class stackelbergduopolClass:
         ax.set_ylim([0,30]) # fixed x2 range
         ax.set_xlabel("$x_1$")
         ax.set_ylabel("$x_2$")
-        ax.set_title("Changing parameters")
+        ax.set_title("Visualization of changing different parameters")
 
         # Show the plot
         plt.show()
