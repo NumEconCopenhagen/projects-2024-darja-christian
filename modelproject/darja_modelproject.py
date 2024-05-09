@@ -1,5 +1,7 @@
 from types import SimpleNamespace
 import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sm
 class stackelbergduopolClass:
 
     def __init__(self):
@@ -113,5 +115,41 @@ class stackelbergduopolClass:
             nit += 1
         
         return x,nit,nfev,njev
+    
+
+    def interactive_figure(self, p1, p2, a_1, b_1):
+        ## solution using sympy 
+        x_1 = sm.symbols("x_1")
+        x_2 = sm.symbols("x_2")
+        a = sm.symbols("a")
+        b = sm.symbols("b")
+        p_1 = sm.symbols("p_1")
+        p_2 = sm.symbols("p_2")
+        inverse_demand =  a-b*(x_1 + x_2)
+        objective_1 = inverse_demand * x_1 - p_1*x_1
+        objective_2 = inverse_demand * x_2 - p_2*x_2
+        foc = sm.diff(objective_2, x_2)
+        sol = sm.solve(sm.Eq(foc,0), x_2)
+        sub_objective_1= objective_1.subs(x_2, sol[0])
+        foc_1 = sm.diff(sub_objective_1, x_1)
+        sol_1 = sm.solve(sm.Eq(foc_1,0), x_1)
+        ## optimal solution
+        optimal_x1 = sol_1[0].subs(a, a_1).subs(b, b_1).subs(p_1, p1).subs(p_2,p2)
+        optimal_x2 = sol[0].subs(x_1, optimal_x1).subs(a, a_1).subs(b, b_1).subs(p_1,p1).subs(p_2,p2)
+    
+    # Create a figure
+        fig = plt.figure(frameon=True, dpi=100)
+        ax = fig.add_subplot(1, 1, 1)
+        ax.scatter(optimal_x1, optimal_x2, color = "darkgreen")
+        ax.set_xlim([0,30]) # fixed x range
+        ax.set_ylim([0,30]) # fixed y range
+        ax.set_xlabel("$x_1$")
+        ax.set_ylabel("$x_2$")
+        ax.set_title("Changing parameters")
+
+        # Show the plot
+        plt.show()
+
+
     
     
