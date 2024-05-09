@@ -138,7 +138,7 @@ class stackelbergduopolClass:
         optimal_x2 = sol[0].subs(x_1, optimal_x1).subs(a, a_1).subs(b, b_1).subs(p_1,p1).subs(p_2,p2)
     
     # Create a figure
-        fig = plt.figure(frameon=True, dpi=100)
+        fig = plt.figure(frameon=True, dpi=500)
         ax = fig.add_subplot(1, 1, 1)
         ax.scatter(optimal_x1, optimal_x2, color = "darkgreen")
         ax.set_xlim([0,30]) # fixed x range
