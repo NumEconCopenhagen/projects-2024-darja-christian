@@ -51,6 +51,7 @@ class stackelbergduopolClass:
 
 
     ## first order conditions
+    ## these are calculated by our own, we could use sympy here 
     def derivative_1(self, x_1, a = 5, b = 1/4, p = 2):
         x_2_best = (a-p)/(2*b) - x_1/2
         foc_1 = self.P(x_1, x_2_best) + x_1 * (- b) - p
