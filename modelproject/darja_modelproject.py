@@ -119,7 +119,7 @@ class stackelbergduopolClass:
     
 
     ## for the interactive plot
-    def interactive_figure(self, p1, p2, a_1, b_1):
+    def interactive_figure_sol(self, p1, p2, a_1, b_1):
         ## solution using sympy 
         x_1 = sm.symbols("x_1")
         x_2 = sm.symbols("x_2")
@@ -142,7 +142,7 @@ class stackelbergduopolClass:
     # Create a figure
         fig = plt.figure(frameon=True, dpi=500)
         ax = fig.add_subplot(1, 1, 1)
-        ax.scatter(optimal_x1, optimal_x2, color = "darkgreen")
+        ax.scatter(optimal_x1, optimal_x2, color = "darkred")
         ax.set_xlim([0,30]) # fixed x1 range
         ax.set_ylim([0,30]) # fixed x2 range
         ax.set_xlabel("$x_L$")
@@ -151,6 +151,46 @@ class stackelbergduopolClass:
 
         # Show the plot
         plt.show()
+
+
+
+    def interactive_figure_profit(self, p1, p2, a_1, b_1):
+        ## solution using sympy 
+        x_1 = sm.symbols("x_1")
+        x_2 = sm.symbols("x_2")
+        a = sm.symbols("a")
+        b = sm.symbols("b")
+        p_1 = sm.symbols("p_1")
+        p_2 = sm.symbols("p_2")
+        inverse_demand =  a-b*(x_1 + x_2)
+        objective_1 = inverse_demand * x_1 - p_1*x_1
+        objective_2 = inverse_demand * x_2 - p_2*x_2
+        foc = sm.diff(objective_2, x_2)
+        sol = sm.solve(sm.Eq(foc,0), x_2)
+        sub_objective_1= objective_1.subs(x_2, sol[0])
+        foc_1 = sm.diff(sub_objective_1, x_1)
+        sol_1 = sm.solve(sm.Eq(foc_1,0), x_1)
+        ## optimal solution
+        optimal_x1 = sol_1[0].subs(a, a_1).subs(b, b_1).subs(p_1, p1).subs(p_2,p2)
+        optimal_x2 = sol[0].subs(x_1, optimal_x1).subs(a, a_1).subs(b, b_1).subs(p_1,p1).subs(p_2,p2)
+        objective_1_optimal = objective_1.subs(x_1, optimal_x1).subs(x_2, optimal_x2).subs(a, a_1).subs(b, b_1).subs(p_1,p1)
+        objective_2_optimal = objective_2.subs(x_1, optimal_x1).subs(x_2, optimal_x2).subs(a, a_1).subs(b, b_1).subs(p_2,p2)
+    # Create a figure
+        fig = plt.figure(frameon=True, dpi=500)
+        ax = fig.add_subplot(1, 1, 1)
+        ax.scatter(optimal_x1 , objective_1_optimal, color = "darkgreen",  marker = 'o', label = "$x_L$")
+        ax.scatter(optimal_x2,objective_2_optimal, color = "pink", marker = 'o', label = "$X_F$")
+        ax.set_xlim([0,20]) # fixed x1 range
+        ax.set_ylim([0,20]) # fixed x2 range
+        ax.set_xlabel("$x_L$/$x_F$")
+        ax.set_ylabel("Profit of $x_L$/$x_F$")
+        ax.legend()
+        # Show the plot
+        plt.show()
+
+
+
+
 
 
     
