@@ -6,6 +6,7 @@ Our project has the following parts:
 - Numerical solution
 - Graphical analysis 
 - Extension from a duopol to an oligopol
+- Conclusion
 
 
 The **results** of the project can be seen from running [modelproject.ipynb](modelproject.ipynb).
