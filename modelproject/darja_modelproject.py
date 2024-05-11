@@ -179,7 +179,7 @@ class stackelbergduopolClass:
         fig = plt.figure(frameon=True, dpi=500)
         ax = fig.add_subplot(1, 1, 1)
         ax.scatter(optimal_x1 , objective_1_optimal, color = "darkgreen",  marker = 'o', label = "$x_L$")
-        ax.scatter(optimal_x2,objective_2_optimal, color = "pink", marker = 'o', label = "$X_F$")
+        ax.scatter(optimal_x2,objective_2_optimal, color = "pink", marker = 'o', label = "$x_F$")
         ax.set_xlim([0,20]) # fixed x1 range
         ax.set_ylim([0,20]) # fixed x2 range
         ax.set_xlabel("$x_L$/$x_F$")
@@ -189,6 +189,53 @@ class stackelbergduopolClass:
         plt.show()
 
 
+
+
+    def interactive_figure_profit_extend(self, p1, p2, p3, a_1, b_1):
+        ## solution using sympy 
+        x_1 = sm.symbols("x_1")
+        x_2 = sm.symbols("x_2")
+        x_3 = sm.symbols("x_3")
+        a = sm.symbols("a")
+        b = sm.symbols("b")
+        p_1 = sm.symbols("p_1")
+        p_2 = sm.symbols("p_2")
+        p_3 = sm.symbols("p_3")
+        inverse_demand_extend =  a-b*(x_1 + x_2 + x_3)
+        objective_1_extend = inverse_demand_extend * x_1 - p_1*x_1
+        objective_2_extend = inverse_demand_extend * x_2 - p_2*x_2
+        objective_3_extend = inverse_demand_extend * x_3 - p_3*x_3
+        foc2_extend = sm.diff(objective_2_extend, x_2)
+        sol2_extend = sm.solve(sm.Eq(foc2_extend,0), x_2)
+        foc3_extend = sm.diff(objective_3_extend, x_3)
+        foc3_twovariables = foc3_extend.subs(x_2, sol2_extend[0])
+        solution_foc_3 = sm.solve(sm.Eq(foc3_twovariables,0), x_3)
+        solution_foc_2 = sol2_extend[0].subs(x_3, solution_foc_3[0])
+        objective_1_only_onevariable = objective_1_extend.subs(x_2, solution_foc_2).subs(x_3, solution_foc_3[0])
+        foc1_extend = sm.diff(objective_1_only_onevariable, x_1)
+        sol1_extend = sm.solve(sm.Eq(foc1_extend,0), x_1)
+        optimal_second = solution_foc_2.subs(x_1, sol1_extend[0])
+        optimal_third = solution_foc_3[0].subs(x_1, sol1_extend[0])
+        ## optimal solution
+        optimal_x1 = sol1_extend[0].subs(a, a_1).subs(b, b_1).subs(p_1, p1).subs(p_2,p2).subs(p_3,p3)
+        optimal_x2 = optimal_second.subs(a, a_1).subs(b, b_1).subs(p_1, p1).subs(p_2,p2).subs(p_3,p3)
+        optimal_x3 = optimal_third.subs(a, a_1).subs(b, b_1).subs(p_1, p1).subs(p_2, p2).subs(p_3,p3)
+        objective_1_optimal = objective_1_extend.subs(x_1, optimal_x1).subs(x_2, optimal_x2).subs(x_3, optimal_x3).subs(a, a_1).subs(b, b_1).subs(p_1,p1)
+        objective_2_optimal = objective_2_extend.subs(x_1, optimal_x1).subs(x_2, optimal_x2).subs(x_3, optimal_x3).subs(a, a_1).subs(b, b_1).subs(p_2,p2)
+        objective_3_optimal = objective_3_extend.subs(x_1, optimal_x1).subs(x_2, optimal_x2).subs(x_3, optimal_x3).subs(a, a_1).subs(b, b_1).subs(p_3,p3)
+    # Create a figure
+        fig = plt.figure(frameon=True, dpi=500)
+        ax = fig.add_subplot(1, 1, 1)
+        ax.scatter(optimal_x1 , objective_1_optimal, color = "darkgreen",  marker = 'o', label = "$x_L$")
+        ax.scatter(optimal_x2,objective_2_optimal, color = "darkred", marker = 'o', label = "$x_{F1}$")
+        ax.scatter(optimal_x3,objective_3_optimal, color = "midnightblue", marker = 'o', label = "$x_{F2}$")
+        ax.set_xlim([0,20]) # fixed x1 range
+        ax.set_ylim([0,20]) # fixed x2 range
+        ax.set_xlabel("$x_L$/$x_{F1}$/$x_{F2}$")
+        ax.set_ylabel("Profit of $x_L$/$x_{F1}$/$x_{F2}$")
+        ax.legend()
+        # Show the plot
+        plt.show()
 
 
 
