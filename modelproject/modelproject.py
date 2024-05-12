@@ -207,7 +207,7 @@ class stackelbergduopolClass:
     def compute_quantities(self,a_val, b_val, p1_val, p2_val):
     # Define inverse demand and cost functions
         # Define symbols
-        x_1, x_2, a, b, p_1, p_2 = sm.symbols('x_1 x_2 a b p_1 p_2')
+        x_1, x_2, a, b, p_L, p_F = sm.symbols('x_1 x_2 a b p_L p_F')
         inverse_demand = a - b * (x_1 + x_2)
         objective_1 = inverse_demand * x_1 - p1_val * x_1
         objective_2 = inverse_demand * x_2 - p2_val * x_2
@@ -225,19 +225,19 @@ class stackelbergduopolClass:
         sol_x2_final = sol_x2.subs(x_1, sol_x1)
     
         # Ensure all expressions are fully substituted
-        sol_x1_numeric = sol_x1.subs([(a, a_val), (b, b_val), (p_1, p1_val)])
-        sol_x2_numeric = sol_x2_final.subs([(a, a_val), (b, b_val), (p_1, p1_val), (p_2, p2_val)])
+        sol_x1_numeric = sol_x1.subs([(a, a_val), (b, b_val), (p_L, p1_val)])
+        sol_x2_numeric = sol_x2_final.subs([(a, a_val), (b, b_val), (p_L, p1_val), (p_F, p2_val)])
     
         return float(sol_x1_numeric), float(sol_x2_numeric)
 
     # Visualization function
-    def plot_stackelberg(self,a, b, p1, p2):
-        q_leader, q_follower = self.compute_quantities(a, b, p1, p2)
+    def plot_stackelberg(self,a, b, p_L, p_F):
+        q_leader, q_follower = self.compute_quantities(a, b, p_L, p_F)
         plt.figure(figsize=(10, 5), frameon=True, dpi=500)
         plt.bar(['Leader', 'Follower'], [q_leader, q_follower], color=['darkgreen', 'darkred'])
         plt.xlabel('Firms')
         plt.ylabel('Quantities')
-        plt.title(f'Stackelberg Quantities: a={a}, b={b}, p1={p1}, p2={p2}')
+        plt.title(f'Stackelberg Quantities: a={a}, b={b}, p1={p_L}, p2={p_F}')
         plt.ylim(0, max(q_leader, q_follower) + 1)
         plt.show()
 
