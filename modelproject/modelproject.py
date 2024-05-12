@@ -237,7 +237,7 @@ class stackelbergduopolClass:
         plt.bar(['Leader', 'Follower'], [q_leader, q_follower], color=['darkgreen', 'darkred'])
         plt.xlabel('Firms')
         plt.ylabel('Quantities')
-        plt.title(f'Stackelberg Quantities: a={a}, b={b}, p1={p_L}, p2={p_F}')
+        plt.title(f'Stackelberg Quantities: a={a}, b={b}, p_L={p_L}, p_F={p_F}')
         plt.ylim(0, max(q_leader, q_follower) + 1)
         plt.show()
 
