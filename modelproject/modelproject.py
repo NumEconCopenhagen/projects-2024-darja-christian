@@ -72,7 +72,7 @@ class stackelbergduopolClass:
         x_2 = (a-p)/(2*b) - x_1/2
         return x_2
 
-
+    ## own solver, similar to the lecture to find optimum 
     def minimize_solver(self, x0, alphas=[0.01,0.05,0.1,0.25,0.5,1], max_iter=500,tol=1e-8):
         # step 1: initialize
         x = x0
