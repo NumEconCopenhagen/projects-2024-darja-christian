@@ -56,6 +56,20 @@ class ExchangeEconomyClass:
         eps2 = x2A-par.w2A + x2B-(1-par.w2A)
 
         return eps1,eps2
+    
+    ## for task 3 - excess demand should be close to 0 
+    ## therfore look at the sum of the absolute values 
+    def check_market_clearing_task3(self,p1):
+
+        par = self.par
+
+        x1A,x2A = self.demand_A(p1)
+        x1B,x2B = self.demand_B(p1)
+
+        eps1 = abs(x1A-par.w1A + x1B-(1-par.w1A))
+        eps2 = abs(x2A-par.w2A + x2B-(1-par.w2A))
+
+        return eps1 + eps2
 
 ## negative utility function defined
     
