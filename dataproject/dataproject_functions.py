@@ -30,7 +30,7 @@ def interactive_figure(data1, data2, country):
     selected_country_data2 = data2[data2['Countries'] == country]
     az.plot(selected_country_data2['year'], selected_country_data2['debt'])
     az.set_xlabel('Year')
-    az.set_ylabel('Debt')
+    az.set_ylabel('Annual Debt (in €)')
     az.set_title("Time Series of Debt for {}".format(country))
     plt.xticks(rotation=45)
 
