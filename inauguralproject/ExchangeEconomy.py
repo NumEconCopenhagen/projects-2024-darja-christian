@@ -14,6 +14,8 @@ class ExchangeEconomyClass:
         # b. endowments
         par.w1A = 0.8
         par.w2A = 0.3
+    
+    ## utility functions defined
 
     def utility_A(self,x1A,x2A):
         return x1A**(self.par.alpha)*x2A**(1-self.par.alpha)
@@ -30,6 +32,7 @@ class ExchangeEconomyClass:
         self.utility_B(x1B, x2B) >= utility_personB)
     
 
+    ## demand functions defined
     
     def demand_A(self,p1):
         demand_x1 =  self.par.alpha * (p1*self.par.w1A + self.par.w2A)/p1  
