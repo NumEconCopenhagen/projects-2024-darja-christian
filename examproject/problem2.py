@@ -42,10 +42,6 @@ avg_realized_utility = np.zeros(par.N)
 # set seed 
 np.random.seed(2024)
 
-## for 
-epsilon_friends = np.random.normal(0, par.sigma, (par.J, par.N))
-
-
 # Simulation
 for i in range(1, par.N + 1):  # For each graduate
     career_choices = np.zeros(par.J)
@@ -59,7 +55,7 @@ for i in range(1, par.N + 1):  # For each graduate
         # Calculate prior expected utility
         prior_expected_utility = par.v + np.mean(epsilon_friends, axis=1)
         
-        # Generate noise for the graduate
+        # Generate noise for the graduate itself 
         epsilon_graduate = np.random.normal(0, par.sigma, par.J)
         
         # Choose career with highest expected utility
