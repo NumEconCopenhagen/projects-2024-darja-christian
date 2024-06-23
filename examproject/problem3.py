@@ -7,7 +7,7 @@ def question1():
     Plots the points and the triangles.
 
     Returns:
-        tuple: The random point y, and the points A, B, C, D.
+        The random point y, and the points A, B, C, D.
     """
     # Random points in the unit square
     rng = np.random.default_rng(2024)
@@ -51,7 +51,7 @@ def question2():
     Computes the barycentric coordinates of y with respect to the triangles and checks if y is inside either triangle.
 
     Returns:
-        tuple: The random point y, the points A, B, C, D, the barycentric coordinates with respect to triangles ABC and CDA,
+        The random point y, the points A, B, C, D, the barycentric coordinates with respect to triangles ABC and CDA,
                and booleans indicating if y is inside the triangles.
     """
     # Random points in the unit square
@@ -97,7 +97,7 @@ def question3():
     interpolates the value of f(y) using the barycentric coordinates. Compares the interpolated value with the true value of f(y).
 
     Returns:
-        tuple: The random point y, the interpolated value of f(y), and the true value of f(y).
+        The random point y, the interpolated value of f(y), and the true value of f(y).
     """
     # Random points in the unit square
     rng = np.random.default_rng(2024)
