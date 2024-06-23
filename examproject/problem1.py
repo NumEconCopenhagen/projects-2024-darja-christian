@@ -76,3 +76,51 @@ for p1 in p1_range:
 
 
 
+## QUESTION 2
+
+
+# Functions to calculate optimal values
+def optimal_labor(w, p, A, gamma):
+    return (p * A * gamma / w)**(1 / (1 - gamma))
+
+def optimal_output(A, l, gamma):
+    return A * l**gamma
+
+def optimal_profit(w, p, A, gamma):
+    l = optimal_labor(w, p, A, gamma)
+    return p * optimal_output(A, l, gamma) - w * l
+
+def equilibrium_conditions(vars, par):
+    p1, p2 = vars
+
+    # Optimal labor and output for each good
+    l1 = optimal_labor(w, p1, par.A, par.gamma)
+    l2 = optimal_labor(w, p2, par.A, par.gamma)
+    y1 = optimal_output(par.A, l1, par.gamma)
+    y2 = optimal_output(par.A, l2, par.gamma)
+    pi1 = optimal_profit(w, p1, par.A, par.gamma)
+    pi2 = optimal_profit(w, p2, par.A, par.gamma)
+    
+    # Total labor
+    total_labor = l1 + l2
+    
+    # Household income
+    income = w * total_labor + par.T + pi1 + pi2
+    
+    # Optimal consumption
+    c1 = par.alpha * income / p1
+    c2 = (1 - par.alpha) * income / p2
+    
+    # Market clearing conditions
+    goods_market1 = y1 - c1
+    goods_market2 = y2 - c2
+    ## we will only concentrate on two out of three markets 
+    return goods_market1, goods_market2
+
+def absolute_sum(vars, par):
+    result = equilibrium_conditions(vars, par)
+    #return np.sum(np.square(residuals))
+    return sum(np.abs(result))
+
+
+
