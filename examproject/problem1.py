@@ -168,11 +168,11 @@ def swf(tau, w, p1, p2, par):
     l = 1  # Assuming full labor market clearing
     c1 = consumption1_3(par.alpha, w, l, 0, pi1, pi2, p1)  # No transfer initially
     c2 = consumption2_3(par.alpha, w, l, 0, pi1, pi2, p2, tau)  # No transfer initially
-    T = tau * c2  # T = τc2
+    T = tau * c2  # T = τc2 ## given in task 
     c1 = consumption1_3(par.alpha, w, l, T, pi1, pi2, p1)  # With transfer
     c2 = consumption2_3(par.alpha, w, l, T, pi1, pi2, p2, tau)  # With transfer
     U = utility_3(c1, c2, par.nu, l, par.epsilon)
-    y2 = optimal_output(optimal_labor(w, p2, par.A, par.gamma), par.A, par.gamma)
+    y2 = optimal_output_3(optimal_labor_3(w, p2, par.A, par.gamma), par.A, par.gamma)
     return U - par.kappa * y2
 
 def optimize_swf_3(p1, p2, par):
